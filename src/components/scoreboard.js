@@ -14,7 +14,12 @@ class Scoreboard extends Component {
       strikes: 0,
       outs: 0,
       commentary: [],
-      input: " "
+      input: " ",
+      firstBase: "T.Hoffman",
+      secondBase: "J.Herring",
+      thirdBase: "M.Herring",
+      picther: "D. Sams",
+      batter: "A. TsogBaatar"
     };
   }
   componentDidMount() {}
@@ -50,7 +55,9 @@ class Scoreboard extends Component {
   };
   handleOut = () => {
     this.setState({
-      outs: this.state.outs + 1
+      outs: this.state.outs + 1,
+      balls: 0,
+      strikes: 0
     });
   };
   handleStrike = () => {
@@ -187,12 +194,21 @@ class Scoreboard extends Component {
             <h1>{this.state.awayHit}</h1>
             <h1>{this.state.awayError}</h1>
           </div>
-          <div>
+          <div className="count-outs">
             <h1>Outs:{this.state.outs <= 3 ? this.state.outs : 3}</h1>
             <h1>
               Count: {this.state.balls <= 3 ? this.state.balls : 3} {"-"}{" "}
               {this.state.strikes <= 2 ? this.state.strikes : 2}
             </h1>
+            <div>
+              <h1>1B:{this.state.firstBase}</h1>
+              <h1>2B:{this.state.secondBase}</h1>
+              <h1>3B:{this.state.thirdBase}</h1>
+            </div>
+            <div>
+              <h1>Now Pitching: {this.state.picther}</h1>
+              <h1>Now Batting: {this.state.batter}</h1>
+            </div>
           </div>
           <div className="teams">
             <div className="braves-name">

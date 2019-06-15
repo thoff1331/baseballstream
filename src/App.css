@@ -76,3 +76,8 @@
 button {
   font-size: 30px;
 }
+.count-outs {
+  border: 8px solid black;
+  display: flex;
+  justify-content: space-evenly;
+}

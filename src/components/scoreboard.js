@@ -12,7 +12,9 @@ class Scoreboard extends Component {
       awayError: 0,
       balls: 0,
       strikes: 0,
-      outs: 0
+      outs: 0,
+      commentary: [],
+      input: " "
     };
   }
   componentDidMount() {}
@@ -71,7 +73,14 @@ class Scoreboard extends Component {
       awayError: 0,
       balls: 0,
       strikes: 0,
-      outs: 0
+      outs: 0,
+      commentary: "",
+      input: ""
+    });
+  };
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
     });
   };
   handleResetCount = () => {
@@ -85,7 +94,28 @@ class Scoreboard extends Component {
       outs: 0
     });
   };
+  handleCommentary = e => {
+    e.preventDefault();
+    this.setState(
+      {
+        input: "",
+        commentary: [...this.state.commentary, this.state.input]
+      },
+      () => {
+        this.clearInput();
+      }
+    );
+  };
+  clearInput = () => {
+    this.setState({
+      input: " "
+    });
+  };
   render() {
+    console.log(this.state.commentary);
+    let mapped = this.state.commentary.map((val, index) => {
+      return <h3 key={index}>{val}</h3>;
+    });
     return (
       <div className="scoreboard-background">
         <div className="scoreboard-container">
@@ -158,9 +188,10 @@ class Scoreboard extends Component {
             <h1>{this.state.awayError}</h1>
           </div>
           <div>
-            <h1>Outs:{this.state.outs}</h1>
+            <h1>Outs:{this.state.outs <= 3 ? this.state.outs : 3}</h1>
             <h1>
-              Count: {this.state.balls} {"-"} {this.state.strikes}
+              Count: {this.state.balls <= 3 ? this.state.balls : 3} {"-"}{" "}
+              {this.state.strikes <= 2 ? this.state.strikes : 2}
             </h1>
           </div>
           <div className="teams">
@@ -188,7 +219,10 @@ class Scoreboard extends Component {
           <button onClick={this.handleResetAll}>New Game</button>
           <button onClick={this.handleResetCount}>Reset Count</button>
           <button onClick={this.handleResetOuts}>Reset Outs</button>
+          <input onChange={this.handleChange} name="input" />
+          <button onClick={this.handleCommentary}>add</button>
         </div>
+        {mapped}
       </div>
     );
   }

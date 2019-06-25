@@ -15,11 +15,54 @@ class Scoreboard extends Component {
       outs: 0,
       commentary: [],
       input: " ",
-      firstBase: "T.Hoffman",
-      secondBase: "J.Herring",
-      thirdBase: "M.Herring",
-      picther: "D. Sams",
-      batter: "A. TsogBaatar"
+      firstBase: "",
+      secondBase: "",
+      thirdBase: "",
+      pitcher: "",
+      batter: "",
+      inning: [
+        "Top 1",
+        "Bottom 1",
+        "Top 2",
+        "Bottom 2",
+        "Top 3",
+        "Bottom 3",
+        "Top 4",
+        "Bottom 4",
+        "Top 5",
+        "Bottom 5",
+        "Top 6",
+        "Bottom 6",
+        "Top 7",
+        "Bottom 7",
+        "Top 8",
+        "Bottom 8",
+        "Top 9",
+        "Bottom 9",
+        "Top 10",
+        "Bottom 10",
+        "Top 11",
+        "Bottom 11",
+        "Top 12",
+        "Bottom 12",
+        "Top 13",
+        "Bottom 13",
+        "Top 14",
+        "Bottom 14",
+        "Top 15",
+        "Bottom 15",
+        "Top 16",
+        "Bottom 16",
+        "Top 17",
+        "Bottom 17",
+        "Top 18",
+        "Bottom 18",
+        "Top 19",
+        "Bottom 19",
+        "Top 20",
+        "Bottom 20"
+      ],
+      index: 8
     };
   }
   componentDidMount() {}
@@ -81,8 +124,9 @@ class Scoreboard extends Component {
       balls: 0,
       strikes: 0,
       outs: 0,
-      commentary: "",
-      input: ""
+      commentary: [],
+      input: "",
+      index: 0
     });
   };
   handleChange = e => {
@@ -118,8 +162,37 @@ class Scoreboard extends Component {
       input: " "
     });
   };
+  handleBatterChange = () => {
+    this.setState({
+      batter: this.state.batter
+    });
+  };
+  handlePitcherChange = () => {
+    this.setState({
+      pitcher: this.state.picther
+    });
+  };
+  handleInningChange = () => {
+    this.setState({
+      batter: "",
+      pitcher: "",
+      firstBase: "",
+      secondBase: "",
+      thirdBase: "",
+      balls: 0,
+      strikes: 0,
+      outs: 0,
+      index: this.state.index + 1
+    });
+  };
+  handleNextInning = () => {
+    this.setState({
+      index: this.state.index + 1
+    });
+  };
   render() {
-    console.log(this.state.commentary);
+    console.log(this.state.batter);
+    let index = this.state.index;
     let mapped = this.state.commentary.map((val, index) => {
       return <h3 key={index}>{val}</h3>;
     });
@@ -206,19 +279,19 @@ class Scoreboard extends Component {
               <h1>3B:{this.state.thirdBase}</h1>
             </div>
             <div>
-              <h1>Now Pitching: {this.state.picther}</h1>
+              <h1>Now Pitching: {this.state.pitcher}</h1>
               <h1>Now Batting: {this.state.batter}</h1>
             </div>
           </div>
           <div className="teams">
             <div className="braves-name">
               <h1>Braves</h1>
-              <h4>36-29</h4>
+              <h4>46-33</h4>
             </div>
-            <h1>Top First</h1>
+            <h1>{this.state.inning[index]}</h1>
             <div className="dodgers-name">
               <h1>Dodgers</h1>
-              <h4> 43-22</h4>
+              <h4> 54-26</h4>
             </div>
           </div>
         </div>
@@ -235,10 +308,49 @@ class Scoreboard extends Component {
           <button onClick={this.handleResetAll}>New Game</button>
           <button onClick={this.handleResetCount}>Reset Count</button>
           <button onClick={this.handleResetOuts}>Reset Outs</button>
-          <input onChange={this.handleChange} name="input" />
-          <button onClick={this.handleCommentary}>add</button>
+          <input
+            onChange={this.handleChange}
+            name="input"
+            placeholder="Play-by-Play"
+          />
+          <button onClick={this.handleCommentary}>commentate</button>
+
+          <input
+            onChange={this.handleChange}
+            name="batter"
+            placeholder="change Batter"
+          />
+
+          <input
+            onChange={this.handleChange}
+            name="pitcher"
+            placeholder="Change Pitcher"
+          />
+          <button onClick={this.handleInningChange}>New Inning</button>
+          <button onClick={this.handleNextInning}>Next Inning</button>
+
+          <div className="runners-on-base">
+            <input
+              onChange={this.handleChange}
+              name="firstBase"
+              placeholder="Change 1st Base"
+            />
+            <input
+              onChange={this.handleChange}
+              name="secondBase"
+              placeholder="Change 2nd Base"
+            />
+            <input
+              onChange={this.handleChange}
+              name="thirdBase"
+              placeholder="Change 3rd Base"
+            />
+          </div>
         </div>
-        {mapped}
+        <div className="play-by-play">
+          <h1 className="play-by-play-header">Last Play</h1>
+          <h3 className="commentary"> {mapped} </h3>
+        </div>
       </div>
     );
   }

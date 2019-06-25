@@ -67,9 +67,9 @@
   display: flex;
   width: 50vw;
   height: 50vh;
-  /* margin-left: -1500px; */
-  justify-content: center;
-  align-items: center;
+  margin-left: -675px;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
@@ -80,4 +80,36 @@ button {
   border: 8px solid black;
   display: flex;
   justify-content: space-evenly;
+  font-size: 15px;
+  color: red;
+}
+.commentary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.play-by-play {
+  border: 10px solid black;
+  position: absolute;
+  right: 136px;
+  width: 34vw;
+  height: 50vh;
+  top: 75vh;
+  color: aliceblue;
+  align-content: center;
+}
+.play-by-play-header {
+  color: black;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  background: white;
+  opacity: 0.7;
+  height: 5vh;
+}
+
+.runners-on-base {
+  display: flex;
+  flex-direction: column;
 }

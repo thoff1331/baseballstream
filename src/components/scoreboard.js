@@ -149,7 +149,7 @@ class Scoreboard extends Component {
     e.preventDefault();
     this.setState(
       {
-        input: "",
+        input: this.state.input,
         commentary: [...this.state.commentary, this.state.input]
       },
       () => {
